@@ -13,30 +13,47 @@ class _AutocompleteCustomState extends State<AutocompleteCustom> {
   List<String> added = [];
   String currentText = "123";
   GlobalKey<AutoCompleteTextFieldState<String>> key = new GlobalKey();
+
   _AutocompleteCustomState() {
     textField = SimpleAutoCompleteTextField(
-
       key: key,
       decoration: InputDecoration(
-          labelText: "Thể loại",
-          labelStyle: TextStyle(color: Colors.black26),
-          border: OutlineInputBorder(),
+        hoverColor: Colors.white,
+        fillColor: Colors.white,
+        focusColor: Colors.white,
+        labelText: "Search",
+        labelStyle: TextStyle(color: Colors.black),
+        border: OutlineInputBorder(),
       ),
       suggestions: suggestions,
+      textChanged: (text)=>{
+        print(text),
+        setState(() {
+          currentText = text;
+        })
+      },
+      clearOnSubmit: false,
 
-      textChanged: (text) => currentText = text,
-      clearOnSubmit: true,
+      textSubmitted: (text)  {
+        setState(() {
+          currentText = text;
+        });
+        // print(currentText);
+        //
+      },
 
-      textSubmitted: (text) => setState(() {
-        if (text != "" && text.length<=25) {
-          added.add(text);
-        }
-        if(text.length >=25){
-          AlertDialog(semanticLabel: "nhỏ hơn 25",);
-        }
-      }),
+      submitOnSuggestionTap: false,
+      // currentText = text,
+      // setState(() {
+      //   currentText = text;
+      //   // if (text != "" && text.length <= 25) {
+      //   //   added.add(text);
+      //   // }
+      //   // if (text.length >= 25) {
+      //   //   AlertDialog(semanticLabel: "nhỏ hơn 25",);
+      //   // }
+      // }),
     );
-
   }
 
   List<String> suggestions = [
@@ -54,39 +71,44 @@ class _AutocompleteCustomState extends State<AutocompleteCustom> {
   @override
   Widget build(BuildContext context) {
     Column body = new Column(children: [
-      new ListTile(
-          title: textField,
-          trailing: new IconButton(
-              icon: new Icon(Icons.add),
-              onPressed: () {
-                textField.triggerSubmitted();
-                showWhichErrorText = !showWhichErrorText;
-              })),
+      Container(
+        child: new ListTile(
+          title: Container(color: Colors.white, child: textField),
+          trailing: ButtonIcon(
+            icon: Icon(Icons.search),
+            text: Text(""),
+            onPressed: () {
+              // textField.triggerSubmitted();
+              print(currentText);
+            },
+          ),
+        ),
+      ),
     ]);
 
-    body.children.addAll(added.map((item) {
-
-      return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          Text(
-            item.toString(),
-            style: TextStyle(fontSize: 12),
-          ),
-          ButtonIcon(
-            onPressed: () {
-              setState(() {
-                return added.removeWhere((element) {
-                  return element == item;
-                });
-              });
-            },
-            icon: Icon(Icons.delete),
-            text: Text(""),
-          )
-        ],
-      );
-    }));
+    // body.children.addAll(added.map((item) {
+    //
+    //   return Row(
+    //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+    //     children: [
+    //       Text(
+    //         item.toString(),
+    //         style: TextStyle(fontSize: 12),
+    //       ),
+    //       // ButtonIcon(
+    //       //   onPressed: () {
+    //       //     setState(() {
+    //       //       return added.removeWhere((element) {
+    //       //         return element == item;
+    //       //       });
+    //       //     });
+    //       //   },
+    //       //   icon: Icon(Icons.delete),
+    //       //   text: Text(""),
+    //       // )
+    //     ],
+    //   );
+    // }));
 
     return body;
   }

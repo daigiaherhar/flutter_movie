@@ -5,6 +5,10 @@ import 'TextFieldCustom.dart';
 import 'ButtonIcon.dart';
 
 class EditFileCategory extends StatefulWidget {
+  final List<String> addMenu;
+
+  EditFileCategory(this.addMenu);
+
   @override
   _EditFileCategoryState createState() => _EditFileCategoryState();
 }
@@ -18,7 +22,8 @@ class _EditFileCategoryState extends State<EditFileCategory> {
     "Cổ trang",
     "Đoãn chí bình",
   ];
-  List<String> addMenu = [];
+
+  // List<String> addMenu = [];
   String sChooseDropdown;
 
   @override
@@ -43,8 +48,7 @@ class _EditFileCategoryState extends State<EditFileCategory> {
               onChanged: (newText) {
                 sChooseDropdown = newText;
                 setState(() {
-                  addMenu.add(newText);
-
+                  widget.addMenu.add(newText);
                 });
               },
               underline: SizedBox(),
@@ -59,7 +63,7 @@ class _EditFileCategoryState extends State<EditFileCategory> {
       ],
     );
 
-    column.children.addAll(addMenu.map((item) {
+    column.children.addAll(widget.addMenu.map((item) {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -70,7 +74,7 @@ class _EditFileCategoryState extends State<EditFileCategory> {
           ButtonIcon(
             onPressed: () {
               setState(() {
-                return addMenu.removeWhere((element) {
+                return widget.addMenu.removeWhere((element) {
                   return element == item;
                 });
               });

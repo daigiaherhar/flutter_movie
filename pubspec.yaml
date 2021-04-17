@@ -45,7 +45,7 @@ dependencies:
   flutter_rating_bar: ^4.0.0
   rating_bar: ^0.2.0
   random_color: ^1.0.5
-
+  search: ^0.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -62,9 +62,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/images/choose.jpg
+    - assets/images/choose_img.png
+    - assets/images/logo-K69decor.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

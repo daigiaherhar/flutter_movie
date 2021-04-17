@@ -7,9 +7,9 @@ import 'package:flutter/painting.dart';
 
 
 import 'View/ButtonIcon.dart';
-import 'HomePage_TabView_Movie.dart';
-import 'HomePage_TabView_Admin.dart';
-import 'HomePage_TabView_Info.dart';
+import 'HomePage/ListMovie/HomePage_TabView_Movie.dart';
+import 'Admin/HomePage_TabView_Admin.dart';
+import 'HomePage/HomePage_TabView_Info.dart';
 void main() => runApp(HomePage());
 
 class HomePage extends StatelessWidget {
@@ -25,7 +25,8 @@ class HomePage extends StatelessWidget {
           length: 2,
           child: Scaffold(
             appBar: AppBar(
-              title: const Text('EtQa xem phim tẹt ga'),
+              backgroundColor: Colors.white,
+              title: const Text('EtQa xem phim tẹt ga',style: TextStyle(color: Colors.black),),
               // actions: [
               //   IconButton(
               //     icon: Icon(Icons.send),
@@ -34,14 +35,20 @@ class HomePage extends StatelessWidget {
               //     },
               //   )
               // ],
-              bottom: TabBar(
+
+            ),
+            bottomNavigationBar: Container(
+              color: Colors.black,
+              child: TabBar(
+
                 labelColor: Colors.amber,
-                unselectedLabelColor: Colors.black,
+                unselectedLabelColor: Colors.white,
                 // tô đen khi chọn tabview đó
                 indicator: BoxDecoration(
                     borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30)),
+                        topLeft: Radius.circular(0),
+                        bottomRight: Radius.circular(40),
+                        topRight: Radius.circular(40)),
                     color: Colors.deepOrange),
                 tabs: <Widget>[
                   Tab(

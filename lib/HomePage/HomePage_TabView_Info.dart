@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'HomePage_TabView_Admin.dart';
+import '../Admin/HomePage_TabView_Admin.dart';
 
 class HomeInfo extends StatefulWidget {
 

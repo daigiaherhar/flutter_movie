@@ -1,5 +1,7 @@
 import 'dart:developer';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_movie/Model/Movie.dart';
+import 'package:flutter_movie/View/ButtonIcon.dart';
 import '../Model/CategoryImage.dart';
 import '../Model/Subjects.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -8,23 +10,37 @@ import 'package:flutter/services.dart';
 // import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 import 'package:flutter/material.dart';
 
-import '../HomePage_TabView_Movie.dart';
+import '../HomePage/ListMovie/HomePage_TabView_Movie.dart';
 import 'Comment.dart';
 import 'Detail.dart';
+import 'Episodes.dart';
 import 'Ratting.dart';
 
 class PlayYTB extends StatefulWidget {
   // final List listP;
   // PlayYTB(this.listP);
+
+  var idYTB = YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=0jbyqYl4y1I");
+  Movie movie;
+  PlayYTB(this.movie);
+  static YoutubePlayerController controllerYTB;
   @override
   _PlayYTBState createState() => _PlayYTBState();
 }
 
 class _PlayYTBState extends State<PlayYTB> {
-  YoutubePlayerController _controllerYTB;
+
   List<Subjects> listSubject = [];
   ScrollController controller;
-  var idYTB = YoutubePlayer.convertUrlToId("https://www.youtube.com/watch?v=0jbyqYl4y1I");
+
+  @override
+  void setState(fn) {
+    // TODO: implement setState
+    super.setState(fn);
+    // if(PlayYTB.nextVideo != null){
+    //   PlayYTB.idYTB = PlayYTB.nextVideo;
+    // }
+  }
   @override
   void initState() {
     // String YTBPlay = YoutubePlayerController.convertUrlToId("https://www.youtube.com/watch?v=yV2m7M34X3Y");
@@ -53,8 +69,8 @@ class _PlayYTBState extends State<PlayYTB> {
     //   log('Entered Fullscreen');
     // };
 
-    _controllerYTB = YoutubePlayerController(
-        initialVideoId: idYTB,
+    PlayYTB.controllerYTB = YoutubePlayerController(
+        initialVideoId: YoutubePlayer.convertUrlToId(widget.movie.listURLCacTap[0].toString()),
         flags: const YoutubePlayerFlags(
           mute: false,
           autoPlay: false,
@@ -69,7 +85,7 @@ class _PlayYTBState extends State<PlayYTB> {
   @override
   void deactivate() {
     // Pauses video while navigating to next page.
-    _controllerYTB.pause();
+    PlayYTB.controllerYTB.pause();
     super.deactivate();
   }
 
@@ -77,7 +93,7 @@ class _PlayYTBState extends State<PlayYTB> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    _controllerYTB.dispose();
+    PlayYTB.controllerYTB.dispose();
   }
 
   @override
@@ -85,11 +101,15 @@ class _PlayYTBState extends State<PlayYTB> {
     // SystemChrome.setEnabledSystemUIOverlays([]);
     return YoutubePlayerBuilder(
       player: YoutubePlayer(
-        controller: _controllerYTB,
+        controller: PlayYTB.controllerYTB,
         topActions: [
-          FullScreenButton(
-            color: Colors.pink,
-          )
+          Center(
+            child:  Text("Tập 1",style: TextStyle(fontSize: 20,color: Colors.red,fontWeight: FontWeight.bold),),
+          ),
+
+          // FullScreenButton(
+          //   color: Colors.pink,
+          // )
         ],
       ),
       builder: (context, player) => Scaffold(
@@ -114,26 +134,25 @@ class _PlayYTBState extends State<PlayYTB> {
                         shrinkWrap: true,
                         children: [
                           SingleChildScrollView(
-                            child: Column(
-                              children: [
-                                DetailWatchingYTB(),
-                              ],
-                            ),
+                            child: Container(width: MediaQuery.of(context).size.width*0.82,child: DetailWatchingYTB(widget.movie)),
                           ),
-                          SingleChildScrollView(child: DetailWatchingYTB()),
-                          SingleChildScrollView(child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.89,
+                          SingleChildScrollView(
+                            child: Container(width: MediaQuery.of(context).size.width*0.82,child: Episodes(widget.movie)),
+                          ),
+                          SingleChildScrollView(child: Container(
+                            width: MediaQuery.of(context).size.width*0.82,
                             child: Column(
                               children: [
                                 Ratting(),
-                                CustomComment(),
+                                // CustomComment(),
+
                               ],
                             ),
                           )),
                         ]),
                   ),
                 ),
-              )
+              ),
 
               // child: Column(
               //   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -287,6 +306,8 @@ class _PlayYTBState extends State<PlayYTB> {
               //     ),
               //   ],
               // ),
+
+
             ],
           ),
         ),

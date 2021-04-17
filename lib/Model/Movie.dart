@@ -1,24 +1,26 @@
 class Movie{
+  String _id;
   String _tenPhim;
   int _thoiLuong;
-  int _soTap;
+  String _tongSoTap;
+  List<dynamic> _listURLCacTap;
   String _quocGia;
   String _tacGia;
   int _namPhatHanh;
   String _moTa;
-  String _linkPhimYTB;
-  List<String> _theLoai;
+  List<dynamic> _theLoai;
   String _hinhAnh;
 
   Movie(
+      this._id,
       this._tenPhim,
       this._thoiLuong,
-      this._soTap,
+      this._tongSoTap,
+      this._listURLCacTap,
       this._quocGia,
       this._tacGia,
       this._namPhatHanh,
       this._moTa,
-      this._linkPhimYTB,
       this._theLoai,
       this._hinhAnh);
 
@@ -28,16 +30,10 @@ class Movie{
     _hinhAnh = value;
   }
 
-  List<String> get theLoai => _theLoai;
+  List<dynamic> get theLoai => _theLoai;
 
-  set theLoai(List<String> value) {
+  set theLoai(List<dynamic> value) {
     _theLoai = value;
-  }
-
-  String get linkPhimYTB => _linkPhimYTB;
-
-  set linkPhimYTB(String value) {
-    _linkPhimYTB = value;
   }
 
   String get moTa => _moTa;
@@ -64,10 +60,16 @@ class Movie{
     _quocGia = value;
   }
 
-  int get soTap => _soTap;
+  List<dynamic> get listURLCacTap => _listURLCacTap;
 
-  set soTap(int value) {
-    _soTap = value;
+  set listURLCacTap(List<dynamic> value) {
+    _listURLCacTap = value;
+  }
+
+  String get tongSoTap => _tongSoTap;
+
+  set tongSoTap(String value) {
+    _tongSoTap = value;
   }
 
   int get thoiLuong => _thoiLuong;
@@ -80,5 +82,11 @@ class Movie{
 
   set tenPhim(String value) {
     _tenPhim = value;
+  }
+
+  String get id => _id;
+
+  set id(String value) {
+    _id = value;
   }
 }

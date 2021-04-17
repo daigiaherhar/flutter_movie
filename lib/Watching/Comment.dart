@@ -13,13 +13,13 @@ class CustomComment extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    RandomColor _randomColor = RandomColor();
-    Color _color1 = _randomColor.randomColor(
-      colorBrightness: ColorBrightness.light,
-    );
-    Color _color2 = _randomColor.randomColor(
-      colorBrightness: ColorBrightness.dark,
-    );
+    // RandomColor _randomColor = RandomColor();
+    // Color _color1 = _randomColor.randomColor(
+    //   colorBrightness: ColorBrightness.light,
+    // );
+    // Color _color2 = _randomColor.randomColor(
+    //   colorBrightness: ColorBrightness.dark,
+    // );
     return Column(
       children: [
         Row(
@@ -53,12 +53,12 @@ class CustomComment extends StatelessWidget {
 
                   sNameUser.length == 0
                       ? CircleAvatar(
-                    backgroundColor: _color1,
+
                     radius: 30,
                     child: Icon(Icons.account_circle_rounded),
                   )
                       : CircleAvatar(
-                    backgroundColor: _color2,
+
                     radius: 30,
                     child: Text(
                       sNameUser.substring(0, 1),
